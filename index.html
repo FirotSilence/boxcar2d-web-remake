@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>boxcar2d-web-remake</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/planck-js@0.3.30/dist/planck.min.js"></script>
+</head>
+<body>
+  <canvas id="world"></canvas>
+
+  <header class="topbar glass">
+    <div class="brand"><span>🏎️</span><h1>boxcar2d-web-remake</h1></div>
+    <div class="stats">
+      <div class="chip">世代 <b id="stat-gen">1</b></div>
+      <div class="chip">存活 <b id="stat-alive">-</b></div>
+      <div class="chip">本代最佳 <b id="stat-best">0.0 m</b></div>
+      <div class="chip">历史最佳 <b id="stat-record">0.0 m</b></div>
+    </div>
+    <div class="controls">
+      <div class="speed-group" id="speed-group">
+        <button data-speed="1" class="active">1x</button>
+        <button data-speed="2">2x</button>
+        <button data-speed="4">4x</button>
+        <button data-speed="8">8x</button>
+        <button data-speed="max">MAX</button>
+      </div>
+      <button id="btn-pause" class="btn">⏸ 暂停</button>
+      <button id="btn-skip" class="btn">⏭ 跳过本代</button>
+      <button id="btn-theme" class="btn" title="切换主题">🌙</button>
+    </div>
+  </header>
+
+  <aside class="sidebar glass">
+    <h2>进化参数</h2>
+    <label class="slider">种群大小 <span id="v-pop"></span><input id="in-pop" type="range" min="6" max="60" step="2"></label>
+    <label class="slider">变异率 <span id="v-mut"></span><input id="in-mut" type="range" min="0" max="1" step="0.01"></label>
+    <label class="slider">变异幅度 <span id="v-amp"></span><input id="in-amp" type="range" min="0.05" max="1" step="0.05"></label>
+    <label class="slider">精英保留 <span id="v-elite"></span><input id="in-elite" type="range" min="0" max="8" step="1"></label>
+    <label class="slider">最少轮子 <span id="v-minw"></span><input id="in-minw" type="range" min="1" max="4" step="1"></label>
+    <label class="slider">最多轮子 <span id="v-maxw"></span><input id="in-maxw" type="range" min="2" max="8" step="1"></label>
+    <label class="slider">淘汰超时 <span id="v-stall"></span><input id="in-stall" type="range" min="1" max="10" step="0.5"></label>
+
+    <h2>世界参数</h2>
+    <label class="slider">重力（实时） <span id="v-grav"></span><input id="in-grav" type="range" min="2" max="25" step="0.2"></label>
+    <label class="slider">地形难度（点应用生效） <span id="v-diff"></span><input id="in-diff" type="range" min="0" max="1" step="0.05"></label>
+    <div class="row">
+      <input id="in-seed" type="text" placeholder="随机种子">
+      <button id="btn-dice" class="btn" title="随机种子">🎲</button>
+      <button id="btn-apply" class="btn primary">应用</button>
+    </div>
+
+    <h2>操作</h2>
+    <div class="row">
+      <button id="btn-reset" class="btn danger">🔄 重置进化</button>
+      <button id="btn-export" class="btn">📤 导出最佳</button>
+    </div>
+    <div class="row">
+      <button id="btn-import" class="btn">📥 导入基因</button>
+      <button id="btn-load" class="btn">💾 载入存档</button>
+      <button id="btn-clear" class="btn danger" title="清除本地存档">🗑</button>
+    </div>
+    <input id="file-import" type="file" accept="application/json" hidden>
+
+    <h2>排行榜</h2>
+    <ol id="leaderboard"></ol>
+
+    <h2>适应度曲线</h2>
+    <canvas id="chart"></canvas>
+
+    <h2>车辆详情</h2>
+    <div id="car-detail" class="muted">点击画面中的小车查看基因详情</div>
+  </aside>
+
+  <button id="btn-follow" class="btn primary" hidden>🎥 恢复跟随</button>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

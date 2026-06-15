@@ -1,0 +1,7 @@
+boxcar2d-web-remake
+
+This project is an independent browser implementation inspired by the classic
+BOXCAR2D Flash project. It is not affiliated with, endorsed by, or derived from
+the original BOXCAR2D project's source code or assets.
+
+This project uses planck.js for physics simulation.
